@@ -28,7 +28,7 @@ void addEmployee() {
         printf("Error opening file!\n");
         return;
     }
-    fprintf(file, "%d %s %s %d\n", newEmployee.id, newEmployee.name, newEmployee.designation, newEmployee.salary);
+    fprintf(file,"%d %s %s %d\n", newEmployee.id, newEmployee.name, newEmployee.designation, newEmployee.salary);
     printf("Employee added successfully!\n");
     fclose(file);
 }
