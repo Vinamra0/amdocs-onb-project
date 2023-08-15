@@ -11,7 +11,6 @@ struct Employee {
 
 void addEmployee() {
     struct Employee newEmployee;
-
     printf("Enter Employee ID: ");
     scanf("%d", &newEmployee.id);
 
@@ -29,7 +28,6 @@ void addEmployee() {
         printf("Error opening file!\n");
         return;
     }
-
     fprintf(file, "%d %s %s %d\n", newEmployee.id, newEmployee.name, newEmployee.designation, newEmployee.salary);
     printf("Employee added successfully!\n");
     fclose(file);
@@ -41,12 +39,10 @@ void listEmployees() {
         printf("No Employee details available.\n");
         return;
     }
-
     struct Employee emp;
     while (fscanf(file, "%d %s %s %d", &emp.id, emp.name, emp.designation, &emp.salary) != EOF) {
         printf("Employee ID: %d, Name: %s, Designation: %s, Salary: %d\n", emp.id, emp.name, emp.designation, emp.salary);
     }
-
     fclose(file);
 }
 
@@ -56,19 +52,15 @@ void deleteEmployee(int _id) {
         printf("No employee available.\n");
         return;
     }
-
     FILE *tempFile = fopen("temp.txt", "w");
     struct Employee emp;
-
     while (fscanf(file, "%d %s %s %d", &emp.id, emp.name, emp.designation, &emp.salary) != EOF) {
         if (emp.id != _id) {
             fprintf(tempFile, "%d %s %s %d\n", emp.id, emp.name, emp.designation, emp.salary);
         }
     }
-
     fclose(file);
     fclose(tempFile);
-
     remove("employee_data.txt");
     rename("temp.txt", "employee_data.txt");
     printf("Employee deleted successfully!\n");
@@ -80,10 +72,8 @@ void updateEmployee(int _id) {
         printf("No employee available.\n");
         return;
     }
-
     FILE *tempFile = fopen("temp.txt", "w");
     struct Employee emp;
-
     while (fscanf(file, "%d %s %s %d", &emp.id, emp.name, emp.designation, &emp.salary) != EOF) {
         if (emp.id == _id) {
             printf("Enter new Employee Name: ");
@@ -95,13 +85,10 @@ void updateEmployee(int _id) {
             printf("Enter new Employee Salary: ");
             scanf("%d", &emp.salary);
         }
-
         fprintf(tempFile, "%d %s %s %d\n", emp.id, emp.name, emp.designation, emp.salary);
     }
-
     fclose(file);
     fclose(tempFile);
-
     remove("employee_data.txt");
     rename("temp.txt", "employee_data.txt");
     printf("Employee details updated successfully!\n");
@@ -109,7 +96,6 @@ void updateEmployee(int _id) {
 
 int main() {
     int choice, id;
-
     while (1) {
         printf("\nEmployee Management System\n");
         printf("1. Add Employee\n");
