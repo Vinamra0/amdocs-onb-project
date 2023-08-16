@@ -3,16 +3,14 @@
 #include <string.h>
 
 struct Employee
-{
-    int id;
+{    int id;
     char name[30];
     char designation[50];
     int salary;
 };
 
 void addEmployee()
-{
-    struct Employee newEmployee;
+{    struct Employee newEmployee;
     printf("Enter Employee ID:");
     scanf("%d", &newEmployee.id);
     printf("Enter Employee Name:");
@@ -34,8 +32,7 @@ void addEmployee()
 }
 
 void listEmployees()
-{
-    FILE *file = fopen("employee_data.txt", "r");
+{    FILE *file = fopen("employee_data.txt", "r");
     if (file == NULL)
     {
         printf("No Employee Available\n");
@@ -50,8 +47,7 @@ void listEmployees()
 }
 
 void deleteEmployee(int _id)
-{
-    FILE *file = fopen("employee_data.txt", "r");
+{    FILE *file = fopen("employee_data.txt", "r");
     if (file == NULL)
     {
         printf("No employee available.\n");
@@ -74,8 +70,7 @@ void deleteEmployee(int _id)
 }
 
 void updateEmployee(int _id)
-{
-    FILE *file = fopen("employee_data.txt", "r");
+{    FILE *file = fopen("employee_data.txt", "r");
     if (file == NULL)
     {
         printf("No employee available.\n");
@@ -104,8 +99,7 @@ void updateEmployee(int _id)
 }
 
 int main()
-{
-    int choice, id;
+{    int choice, id;
     while (1)
     {
         printf("\nEmployee Management System\n");
