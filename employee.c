@@ -12,7 +12,11 @@ struct Employee
 void addEmployee()
 {    struct Employee newEmployee;
     printf("Enter Employee ID:");
-    scanf("%d", &newEmployee.id);
+    if( scanf("%d", &newEmployee.id)!=1){
+    printf("Invalid Input\n");
+    while(getchar()!='\n')
+    return;
+   }
     printf("Enter Employee Name:");
     scanf("%s", newEmployee.name);
     printf("Enter Employee Designation:");
