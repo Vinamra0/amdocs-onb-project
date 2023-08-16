@@ -2,57 +2,67 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct Employee {
+struct Employee
+{
     int id;
     char name[30];
     char designation[50];
     int salary;
 };
 
-void addEmployee() {
+void addEmployee()
+{
     struct Employee newEmployee;
     printf("Enter Employee ID:");
-    scanf("%d",&newEmployee.id);
+    scanf("%d", &newEmployee.id);
     printf("Enter Employee Name:");
-    scanf("%s",newEmployee.name);
+    scanf("%s", newEmployee.name);
     printf("Enter Employee Designation:");
-    scanf("%s",newEmployee.designation);
+    scanf("%s", newEmployee.designation);
     printf("Enter Employee Salary: ");
     scanf("%d", &newEmployee.salary);
 
     FILE *file = fopen("employee_data.txt", "a");
-    if (file == NULL) {
+    if (file == NULL)
+    {
         printf("Cannot open file!\n");
         return;
     }
-    fprintf(file,"%d %s %s %d\n", newEmployee.id, newEmployee.name, newEmployee.designation, newEmployee.salary);
+    fprintf(file, "%d %s %s %d\n", newEmployee.id, newEmployee.name, newEmployee.designation, newEmployee.salary);
     printf("Employee added successfully\n");
     fclose(file);
 }
 
-void listEmployees() {
+void listEmployees()
+{
     FILE *file = fopen("employee_data.txt", "r");
-    if (file == NULL) {
+    if (file == NULL)
+    {
         printf("No Employee Available\n");
         return;
     }
     struct Employee emp;
-    while (fscanf(file, "%d %s %s %d", &emp.id, emp.name, emp.designation, &emp.salary) != EOF) {
+    while (fscanf(file, "%d %s %s %d", &emp.id, emp.name, emp.designation, &emp.salary) != EOF)
+    {
         printf("Employee ID: %d, Name: %s, Designation: %s, Salary: %d\n", emp.id, emp.name, emp.designation, emp.salary);
     }
     fclose(file);
 }
 
-void deleteEmployee(int _id) {
+void deleteEmployee(int _id)
+{
     FILE *file = fopen("employee_data.txt", "r");
-    if (file == NULL) {
+    if (file == NULL)
+    {
         printf("No employee available.\n");
         return;
     }
     FILE *tempFile = fopen("temp.txt", "w");
     struct Employee emp;
-    while (fscanf(file, "%d %s %s %d", &emp.id, emp.name, emp.designation, &emp.salary) != EOF) {
-        if (emp.id != _id) {
+    while (fscanf(file, "%d %s %s %d", &emp.id, emp.name, emp.designation, &emp.salary) != EOF)
+    {
+        if (emp.id != _id)
+        {
             fprintf(tempFile, "%d %s %s %d\n", emp.id, emp.name, emp.designation, emp.salary);
         }
     }
@@ -63,22 +73,24 @@ void deleteEmployee(int _id) {
     printf("Employee deleted successfully!\n");
 }
 
-void updateEmployee(int _id) {
+void updateEmployee(int _id)
+{
     FILE *file = fopen("employee_data.txt", "r");
-    if (file == NULL) {
+    if (file == NULL)
+    {
         printf("No employee available.\n");
         return;
     }
-    FILE *tempFile = fopen("temp.txt","w");
+    FILE *tempFile = fopen("temp.txt", "w");
     struct Employee emp;
-    while (fscanf(file, "%d %s %s %d", &emp.id, emp.name, emp.designation, &emp.salary) != EOF) {
-        if (emp.id == _id) {
+    while (fscanf(file, "%d %s %s %d", &emp.id, emp.name, emp.designation, &emp.salary) != EOF)
+    {
+        if (emp.id == _id)
+        {
             printf("Enter new Employee Name:");
             scanf("%s", emp.name);
-
             printf("Enter new Employee Designation:");
             scanf("%s", emp.designation);
-
             printf("Enter new Employee Salary:");
             scanf("%d", &emp.salary);
         }
@@ -91,9 +103,11 @@ void updateEmployee(int _id) {
     printf("Employee details updated successfully!\n");
 }
 
-int main() {
+int main()
+{
     int choice, id;
-    while (1) {
+    while (1)
+    {
         printf("\nEmployee Management System\n");
         printf("1. Add Employee\n");
         printf("2. Delete Employee\n");
@@ -102,29 +116,29 @@ int main() {
         printf("5. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                addEmployee();
-                break;
-            case 2:
-                printf("Enter Employee ID to delete:");
-                scanf("%d", &id);
-                deleteEmployee(id);
-                break;
-            case 3:
-                printf("Enter Employee ID to update:");
-                scanf("%d", &id);
-                updateEmployee(id);
-                break;
-            case 4:
-                listEmployees();
-                break;
-            case 5:
-                printf("Thank you for using the EMS.\n");
-                exit(0);
-            default:
-                printf("Please enter a valid option.\n");
+        switch (choice)
+        {
+        case 1:
+            addEmployee();
+            break;
+        case 2:
+            printf("Enter Employee ID to delete:");
+            scanf("%d", &id);
+            deleteEmployee(id);
+            break;
+        case 3:
+            printf("Enter Employee ID to update:");
+            scanf("%d", &id);
+            updateEmployee(id);
+            break;
+        case 4:
+            listEmployees();
+            break;
+        case 5:
+            printf("Thank you for using the EMS.\n");
+            exit(0);
+        default:
+            printf("Please enter a valid option.\n");
         }
     }
 
